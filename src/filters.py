@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
 import numpy as np
 import pandas as pd
-from scipy.signal import savgol_filter, gaussian_filter1d, medfilt
+from scipy.signal import savgol_filter, medfilt
+from scipy.ndimage import gaussian_filter1d
 # For Kalman filter, we might need libraries like filterpy
 # from filterpy.kalman import KalmanFilter # Example
 # from filterpy.common import Q_discrete_white_noise # Example
