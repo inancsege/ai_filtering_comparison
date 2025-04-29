@@ -156,8 +156,9 @@ def visualize_filter_effects(data_file: Optional[str] = None,
     
     # Save figure
     os.makedirs(config.RESULTS_DIR, exist_ok=True)
-    plt.savefig(os.path.join(config.RESULTS_DIR, f'filter_effects_{column.replace(" ", "_")}.png'))
-    print(f"Filter effects visualization saved to: {os.path.join(config.RESULTS_DIR, f'filter_effects_{column.replace(' ', '_')}.png')}")
+    filename = f'filter_effects_{column.replace(" ", "_")}.png'
+    plt.savefig(os.path.join(config.RESULTS_DIR, filename))
+    print(f"Filter effects visualization saved to: {os.path.join(config.RESULTS_DIR, filename)}")
     
     # Show figure
     plt.show()
