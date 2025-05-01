@@ -1,9 +1,15 @@
 import os
+import multiprocessing
 
 # --- Paths ---
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # Project Root: ai_filtering_comparison
 DATA_DIR = os.path.join(BASE_DIR, 'scaledData')
 RESULTS_DIR = os.path.join(BASE_DIR, 'results')
+CACHE_DIR = os.path.join(BASE_DIR, 'cache')
+
+# Ensure directories exist
+os.makedirs(RESULTS_DIR, exist_ok=True)
+os.makedirs(CACHE_DIR, exist_ok=True)
 
 # --- Data ---
 # Using one file initially for faster development
@@ -24,6 +30,23 @@ FILTER_TARGET_COLUMNS = [
     'min_cell_voltage (V)', 'max_temperature (℃)', 'min_temperature (℃)'
 ]
 
+# --- Performance Optimization ---
+# Parallel processing
+USE_MULTIPROCESSING = True
+NUM_CORES = max(1, multiprocessing.cpu_count() - 1)  # Leave one core free for system
+
+# Memory optimization
+USE_FLOAT32 = True  # Use float32 instead of float64 for reduced memory usage
+CHUNK_SIZE = 10000  # For processing large datasets in chunks
+
+# Cache settings
+USE_CACHE = True
+CACHE_EXPIRY_DAYS = 7  # Automatically invalidate cache after 7 days
+CACHE_COMPRESSION_LEVEL = 3  # 0-9, higher = smaller file but slower read/write
+
+# --- GPU Acceleration ---
+USE_GPU = True  # Set to False to disable GPU acceleration completely
+GPU_MEM_LIMIT = 0.8  # Use up to 80% of available GPU memory
 
 # --- Filtering ---
 FILTERS_TO_COMPARE = [
@@ -41,7 +64,6 @@ MA_WINDOW = 5
 GAUSSIAN_SIGMA = 2
 MEDIAN_KERNEL_SIZE = 5
 
-
 # --- Model ---
 # Placeholder - will be used in model.py and train.py
 SEQUENCE_LENGTH = 50 # Example: use previous 50 time steps to predict next
@@ -49,4 +71,8 @@ BATCH_SIZE = 64
 EPOCHS = 10 # Keep low for initial testing
 
 # --- Evaluation ---
-RESULTS_FILE = os.path.join(RESULTS_DIR, 'comparison_results.csv') 
+RESULTS_FILE = os.path.join(RESULTS_DIR, 'comparison_results.csv')
+
+# --- Logging ---
+VERBOSE = True  # Set to False for less console output
+LOG_FILE = os.path.join(RESULTS_DIR, 'run_log.txt') 
