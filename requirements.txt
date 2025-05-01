@@ -7,9 +7,17 @@ matplotlib>=3.4.0
 seaborn>=0.11.0
 joblib>=1.0.0
 
-# Visualization utilities
+# Performance optimizations
+psutil>=5.9.0
 tqdm>=4.60.0
 python-dateutil>=2.8.0
+dask>=2023.3.0  # For parallel processing of large datasets
+memory_profiler>=0.61.0  # Memory usage monitoring
+
+# Caching and data handling
+sqlitedict>=2.1.0  # Efficient on-disk dictionary storage
+h5py>=3.7.0  # Efficient storage of numpy arrays
+pyarrow>=8.0.0  # Fast columnar data format
 
 # GPU acceleration - install based on your hardware
 # For NVIDIA GPUs (uncomment to install)
@@ -23,4 +31,9 @@ scikit-learn-intelex>=2023.0.0
 # Note: The RAPIDS libraries (cudf, cuml) require a CUDA toolkit.
 # For specific versions or for non-standard CUDA installations, 
 # please refer to https://rapids.ai/start.html
+
+# Additional optional dependencies
+numba>=0.56.0  # JIT compilation for faster numerical operations
+bottleneck>=1.3.5  # Fast array operations
+fastparquet>=2023.2.0  # Fast parquet file reading/writing
 
